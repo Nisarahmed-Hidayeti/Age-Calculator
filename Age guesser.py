@@ -1,10 +1,13 @@
 from datetime import date
-
+date = date.today()
 while 1:
     Birth_year = input("What is your birth year")
     try:
         Birth_year = int(Birth_year)
-        break
+        if(0<Birth_year<=date.year):
+            break
+        else:
+            print("Please enter a valid Year")
     except ValueError:
         print("Please enter a valid Year")
 
@@ -12,7 +15,10 @@ while 1:
     Birth_Month = input("What is your birth Month")
     try:
         Birth_Month = int(Birth_Month)
-        break
+        if(0<Birth_Month<13):
+            break
+        else:
+            print("Please enter a valid Month")
     except ValueError:
         print("Please enter a valid Month")
 
@@ -24,5 +30,35 @@ while 1:
     except ValueError:
         print("Please enter a valid Day")
 
-date = date.today()
-print(f"You are {date.year - Birth_year} years, {date.month - Birth_Month} months, and {date.day - Birth_day} days old.")
+ageyear = date.year - Birth_year
+agemonth = date.month - Birth_Month
+ageday = date.day - Birth_day
+
+if agemonth < 0:
+    ageyear -= 1
+    agemonth = agemonth + 12
+
+if ageday < 0:
+    agemonth -= 1
+
+    if date.month == 1:
+        previous_month = 12
+        previous_year = date.year - 1
+    else:
+        previous_month = date.month - 1
+        previous_year = date.year
+
+    if previous_month in [1, 3, 5, 7, 8, 10, 12]:
+        days_in_previous_month = 31
+    elif previous_month in [4, 6, 9, 11]:
+        days_in_previous_month = 30
+    else:
+        # February
+        if previous_year % 4 == 0:
+            days_in_previous_month = 29
+        else:
+            days_in_previous_month = 28
+
+    ageday = ageday + days_in_previous_month
+
+print(f"You are {ageyear} years, {agemonth} months, and {ageday} days old.")
