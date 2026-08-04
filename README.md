@@ -20,5 +20,3 @@ Clone the repository:
 ```bash
 git clone https://github.com/Nisarahmed-Hidayeti/Age-Calculator.git
 
-
-asfasdf
